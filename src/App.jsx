@@ -8,10 +8,12 @@ function App() {
 
   return (
     <>
-      <form action="file" method="post">
-        <input type="file" name="export" id="" />
-        <p>upload file here</p>
-      </form>
+      <div className='flex justify-center items-center h-screen'>
+        <form action="file" method="post"  className=' flex flex-col gap-4 '>
+          <input type="file" name="export" id="" className='border border-amber-300 p-24' />
+          <p className='border border-amber-300 rounded'>upload file here</p>
+        </form>
+      </div>
     </>
   )
 }
