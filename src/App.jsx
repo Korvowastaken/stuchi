@@ -8,7 +8,10 @@ function App() {
 
   return (
     <>
-      <h1>coming soon</h1>
+      <form action="file" method="post">
+        <input type="file" name="export" id="" />
+        <p>upload file here</p>
+      </form>
     </>
   )
 }

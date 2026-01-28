@@ -1,0 +1,383 @@
+{
+ "name": "Sami Gos",
+ "type": "personal_chat",
+ "id": 609171190,
+ "messages": [
+  {
+   "id": 66286,
+   "type": "message",
+   "date": "2026-01-28T16:23:47",
+   "date_unixtime": "1769606627",
+   "from": "Sami Gos",
+   "from_id": "user609171190",
+   "text": "0?",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "0?"
+    }
+   ]
+  },
+  {
+   "id": 66287,
+   "type": "message",
+   "date": "2026-01-28T16:23:56",
+   "date_unixtime": "1769606636",
+   "from": "Robel",
+   "from_id": "user7339487078",
+   "text": "yep",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "yep"
+    }
+   ]
+  },
+  {
+   "id": 66288,
+   "type": "message",
+   "date": "2026-01-28T16:24:53",
+   "date_unixtime": "1769606693",
+   "from": "Sami Gos",
+   "from_id": "user609171190",
+   "photo": "photos/photo_564@28-01-2026_16-24-53.jpg",
+   "photo_file_size": 63057,
+   "width": 1280,
+   "height": 720,
+   "text": "",
+   "text_entities": []
+  },
+  {
+   "id": 66289,
+   "type": "message",
+   "date": "2026-01-28T16:25:02",
+   "date_unixtime": "1769606702",
+   "from": "Sami Gos",
+   "from_id": "user609171190",
+   "text": "mine is 3800k i dont know why",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "mine is 3800k i dont know why"
+    }
+   ]
+  },
+  {
+   "id": 66290,
+   "type": "message",
+   "date": "2026-01-28T16:25:26",
+   "date_unixtime": "1769606726",
+   "from": "Sami Gos",
+   "from_id": "user609171190",
+   "text": "ill create and send u the api when u want to work with it",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "ill create and send u the api when u want to work with it"
+    }
+   ]
+  },
+  {
+   "id": 66291,
+   "type": "message",
+   "date": "2026-01-28T16:26:03",
+   "date_unixtime": "1769606763",
+   "from": "Sami Gos",
+   "from_id": "user609171190",
+   "text": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb21wYW55bmFtZSI6IlNhbXVlbCIsImRlc2NyaXB0aW9uIjoiYWNhYzA1NTctODk4MS00ZmIzLWI3MjEtMzcwNWJjNzVlZTk0IiwiaWQiOiIyNTQ1OGIxNS1jNTE3LTRjYTgtYmUwYS00MTVjODNjMTc1YzAiLCJpc3N1ZWRfYXQiOjE3Njk2MDY3NTAsImlzc3VlciI6Imh0dHBzOi8vbWFwYXBpLmdlYmV0YS5hcHAiLCJqd3RfaWQiOiIwIiwic2NvcGVzIjpbIkRJUkVDVElPTiIsIkdFT0NPRElORyIsIlRJTEUiLCJNQVRSSVgiLCJPTk0iLCJUU1MiXSwidXNlcm5hbWUiOiJTYW1teSBHIn0.Svr-c7A79f0cdQsRSMaYcaefskvR3WfChGdjpej6oeA",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb21wYW55bmFtZSI6IlNhbXVlbCIsImRlc2NyaXB0aW9uIjoiYWNhYzA1NTctODk4MS00ZmIzLWI3MjEtMzcwNWJjNzVlZTk0IiwiaWQiOiIyNTQ1OGIxNS1jNTE3LTRjYTgtYmUwYS00MTVjODNjMTc1YzAiLCJpc3N1ZWRfYXQiOjE3Njk2MDY3NTAsImlzc3VlciI6Imh0dHBzOi8vbWFwYXBpLmdlYmV0YS5hcHAiLCJqd3RfaWQiOiIwIiwic2NvcGVzIjpbIkRJUkVDVElPTiIsIkdFT0NPRElORyIsIlRJTEUiLCJNQVRSSVgiLCJPTk0iLCJUU1MiXSwidXNlcm5hbWUiOiJTYW1teSBHIn0.Svr-c7A79f0cdQsRSMaYcaefskvR3WfChGdjpej6oeA"
+    }
+   ]
+  },
+  {
+   "id": 66292,
+   "type": "message",
+   "date": "2026-01-28T16:26:18",
+   "date_unixtime": "1769606778",
+   "from": "Sami Gos",
+   "from_id": "user609171190",
+   "reply_to_message_id": 66291,
+   "text": "This the api key it generated for me",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "This the api key it generated for me"
+    }
+   ]
+  },
+  {
+   "id": 66293,
+   "type": "message",
+   "date": "2026-01-28T16:26:51",
+   "date_unixtime": "1769606811",
+   "from": "Robel",
+   "from_id": "user7339487078",
+   "text": "mine said 0",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "mine said 0"
+    }
+   ]
+  },
+  {
+   "id": 66294,
+   "type": "message",
+   "date": "2026-01-28T16:27:05",
+   "date_unixtime": "1769606825",
+   "from": "Sami Gos",
+   "from_id": "user609171190",
+   "reply_to_message_id": 66293,
+   "text": "maybe refresh",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "maybe refresh"
+    }
+   ]
+  },
+  {
+   "id": 66295,
+   "type": "message",
+   "date": "2026-01-28T16:27:10",
+   "date_unixtime": "1769606830",
+   "from": "Sami Gos",
+   "from_id": "user609171190",
+   "text": "or a glitch",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "or a glitch"
+    }
+   ]
+  },
+  {
+   "id": 66296,
+   "type": "message",
+   "date": "2026-01-28T16:27:13",
+   "date_unixtime": "1769606833",
+   "from": "Robel",
+   "from_id": "user7339487078",
+   "text": "kezai refreshed",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "kezai refreshed"
+    }
+   ]
+  },
+  {
+   "id": 66297,
+   "type": "message",
+   "date": "2026-01-28T16:27:31",
+   "date_unixtime": "1769606851",
+   "from": "Robel",
+   "from_id": "user7339487078",
+   "text": "i cant claim no more but i get free claim propt",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "i cant claim no more but i get free claim propt"
+    }
+   ]
+  },
+  {
+   "id": 66298,
+   "type": "message",
+   "date": "2026-01-28T16:27:36",
+   "date_unixtime": "1769606856",
+   "from": "Robel",
+   "from_id": "user7339487078",
+   "text": "prompt",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "prompt"
+    }
+   ]
+  },
+  {
+   "id": 66299,
+   "type": "message",
+   "date": "2026-01-28T16:28:01",
+   "date_unixtime": "1769606881",
+   "from": "Sami Gos",
+   "from_id": "user609171190",
+   "text": "use mine for now",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "use mine for now"
+    }
+   ]
+  },
+  {
+   "id": 66300,
+   "type": "message",
+   "date": "2026-01-28T16:29:05",
+   "date_unixtime": "1769606945",
+   "from": "Robel",
+   "from_id": "user7339487078",
+   "text": "eski maybe ill",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "eski maybe ill"
+    }
+   ]
+  },
+  {
+   "id": 66301,
+   "type": "message",
+   "date": "2026-01-28T16:29:08",
+   "date_unixtime": "1769606948",
+   "from": "Robel",
+   "from_id": "user7339487078",
+   "text": "gin koy",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "gin koy"
+    }
+   ]
+  },
+  {
+   "id": 66302,
+   "type": "message",
+   "date": "2026-01-28T16:32:05",
+   "date_unixtime": "1769607125",
+   "from": "Robel",
+   "from_id": "user7339487078",
+   "text": "did u claim after making a token",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "did u claim after making a token"
+    }
+   ]
+  },
+  {
+   "id": 66303,
+   "type": "message",
+   "date": "2026-01-28T16:33:09",
+   "date_unixtime": "1769607189",
+   "from": "Sami Gos",
+   "from_id": "user609171190",
+   "text": "no no i just made the token now to send to you",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "no no i just made the token now to send to you"
+    }
+   ]
+  },
+  {
+   "id": 66304,
+   "type": "message",
+   "date": "2026-01-28T16:34:37",
+   "date_unixtime": "1769607277",
+   "from": "Robel",
+   "from_id": "user7339487078",
+   "text": "idk engdi mine is glitched",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "idk engdi mine is glitched"
+    }
+   ]
+  },
+  {
+   "id": 66305,
+   "type": "message",
+   "date": "2026-01-28T16:35:02",
+   "date_unixtime": "1769607302",
+   "from": "Sami Gos",
+   "from_id": "user609171190",
+   "text": "any other gmail account?",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "any other gmail account?"
+    }
+   ]
+  },
+  {
+   "id": 66306,
+   "type": "message",
+   "date": "2026-01-28T17:00:59",
+   "date_unixtime": "1769608859",
+   "from": "Robel",
+   "from_id": "user7339487078",
+   "text": "bakik eski i have another project idea i think would be impressive",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "bakik eski i have another project idea i think would be impressive"
+    }
+   ]
+  },
+  {
+   "id": 66307,
+   "type": "message",
+   "date": "2026-01-28T17:01:05",
+   "date_unixtime": "1769608865",
+   "from": "Robel",
+   "from_id": "user7339487078",
+   "text": "amm try that eski",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "amm try that eski"
+    }
+   ]
+  },
+  {
+   "id": 66316,
+   "type": "message",
+   "date": "2026-01-28T17:05:22",
+   "date_unixtime": "1769609122",
+   "from": "Robel",
+   "from_id": "user7339487078",
+   "text": "Eski I think making a telegram archiver",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "Eski I think making a telegram archiver"
+    }
+   ]
+  },
+  {
+   "id": 66317,
+   "type": "message",
+   "date": "2026-01-28T17:06:26",
+   "date_unixtime": "1769609186",
+   "from": "Robel",
+   "from_id": "user7339487078",
+   "text": "U can export chats ena after u export chat even if chat cleared you can view it as readable form as you would in telegram",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "U can export chats ena after u export chat even if chat cleared you can view it as readable form as you would in telegram"
+    }
+   ]
+  },
+  {
+   "id": 66318,
+   "type": "message",
+   "date": "2026-01-28T17:06:35",
+   "date_unixtime": "1769609195",
+   "from": "Robel",
+   "from_id": "user7339487078",
+   "text": "That’s my idea rn atleast",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "That’s my idea rn atleast"
+    }
+   ]
+  }
+ ]
+}
