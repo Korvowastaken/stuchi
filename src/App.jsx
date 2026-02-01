@@ -11,12 +11,13 @@ function App() {
       <div className="min-h-screen">
         <nav className=" shadow-sm border-b">
           <div className="flex space-x-8 items-center">
-                <Link to="/upload" className=" hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium">
-                  Upload
-                </Link>
-                <Link to="/" className=" hover:text-gray-600 px-3 py-2 rounded-md text-sm font-medium">
+                <Link to="/" className=" hover:text-gray-400 px-3 py-2 rounded-md text-sm font-medium">
                   Chats
                 </Link>
+                <Link to="/upload" className=" hover:text-gray-400 px-3 py-2 rounded-md text-sm font-medium">
+                  Upload
+                </Link>
+                
               </div>
         </nav>
         

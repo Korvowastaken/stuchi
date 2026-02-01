@@ -30,7 +30,7 @@ function Upload() {
 
     const getChatMessages = () => {
         if (!chatData?.messages) return []
-        return chatData.messages.map(e => e.text || '')
+        return chatData.messages.map(e => [`${e.from}: `, e.text])
     }
 
     const chatMessages = getChatMessages()
@@ -65,11 +65,18 @@ function Upload() {
                     {chatData && (
                         <div className='border border-gray-300 rounded p-4'>
                             <h3 className='font-bold mb-2'>Chat Messages:</h3>
-                            <div className='bg-gray-100 p-3 rounded overflow-auto max-h-96 text-sm text-black'>
+                            <div className='bg-gray-100 p-3 rounded overflow-auto max-h-120 text-sm text-black'>
                                 {chatMessages.map((message, index) => (
-                                    <p key={index} className='mb-2 p-2 bg-white rounded border max-w-200'>
-                                        {message}
-                                    </p>
+                                    <div className=" flex items-start gap-4 my-8">
+                                        <div className="flex">
+                                            <span key={index} className='rounded min-w-24 px-4 py-2 bg-amber-400'>
+                                                {message[0]}
+                                            </span>
+                                        </div>
+                                        <p key={crypto.randomUUID()} className="px-4 py-2 rounded-2xl bg-gray-600 ">
+                                            {message[1]}
+                                        </p>
+                                    </div>
                                 ))}
                             </div>
                         </div>
