@@ -37,10 +37,10 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen">
+      <div className="flex flex-col min-h-screen">
         {user && (
-          <nav className=" shadow-sm border-b">
-            <div className="flex space-x-8 items-center">
+          <nav className="flex shadow-sm border-b min-h-[6vh]">
+            <div className="flex items-center w-full px-1 sm:px-3 lg:px-5">
               <Link to="/" className=" hover:text-gray-400 px-3 py-2 rounded-md text-sm font-medium">
                 Chats
               </Link>
@@ -57,7 +57,7 @@ function App() {
           </nav>
         )}
         
-        <main className="mx-auto py-6 sm:px-6 lg:px-8">
+        <main>
           <Routes>
             <Route 
               path="/login" 
