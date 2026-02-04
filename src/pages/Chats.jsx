@@ -82,7 +82,7 @@ function Chats({ user }) {
                     </button>
                 </div>
             ) : (
-                <div className="flex flex-col items-center py-2 gap-2 min-h-[94vh]">
+                <div className="flex flex-col items-center py-3 min-h-[94vh]">
                     {chats.map((chat) => (
                         <ChatBubble key={chat.id} chat={chat} />
                     ))}
