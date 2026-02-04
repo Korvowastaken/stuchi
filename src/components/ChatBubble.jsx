@@ -10,7 +10,7 @@ function ChatBubble({ chat }) {
     return (
         <div
             onClick={handleClick}
-            className="w-full border-0 border-b p-4 hover:bg-[#5ED0EE] cursor-pointer transition-colors"
+            className="w-full border-0 border-b p-4 hover:bg-[#18373D] cursor-pointer transition-colors"
         >
             <div className="flex justify-between items-start">
                 <div>

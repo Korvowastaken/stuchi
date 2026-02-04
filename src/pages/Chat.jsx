@@ -54,21 +54,45 @@ function Chat({ user }) {
             return text.map((item, index) => {
                 if (typeof item === 'string') return item
                 if (item.type === 'link') {
+                    const displayText = item.text.length > 50 
+                        ? item.text.substring(0, 50) + '...' 
+                        : item.text
+                    
                     return (
                         <a 
                             key={index}
                             href={item.text} 
                             target="_blank" 
                             rel="noopener noreferrer" 
-                            className="text-blue-500 underline hover:text-blue-600"
+                            className="text-blue-400 underline hover:text-blue-300 break-all"
+                            title={item.text} // Show full URL on hover
                         >
-                            {item.text}
+                            {displayText}
                         </a>
                     )
                 }
                 return item.text || ''
             })
         }
+        
+        // Handle long URLs in plain text
+        if (typeof text === 'string') {
+            // Check if it's a long URL
+            if (text.startsWith('http') && text.length > 50) {
+                return (
+                    <a 
+                        href={text} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="text-blue-400 underline hover:text-blue-300 break-all"
+                        title={text}
+                    >
+                        {text.substring(0, 50)}...
+                    </a>
+                )
+            }
+        }
+        
         return text
     }
 
@@ -114,7 +138,7 @@ function Chat({ user }) {
     }
 
     return (
-        <div className="max-w-4xl relative pt-[6vh]">
+        <div className="w-screen relative pt-[6vh]">
            <div className='fixed top-0 left-0 right-0 z-40 flex justify-center items-center border-b min-h-[4vh] px-1 bg-[#0C263B]'>
                 <button
                     onClick={() => navigate('/')}
@@ -131,29 +155,43 @@ function Chat({ user }) {
             </div>
             
 
-            <div className="space-y-4 overflow-auto">
-                {chatData.messages?.map((message, index) => (
-                    <div key={message.id || index} className="flex items-start gap-4">
-                       
-                        <div className="shrink-0">
-                            <div className="bg-amber-400 text-black px-4 py-2 rounded-lg min-w-24 text-center font-medium">
-                                {message.from}
-                            </div>
-                        </div>
+            <div className="space-y-1 overflow-auto px-2 bg-[#1C2B33] min-h-screen">
+                {(() => {
+                    
+                    const uniqueSenders = [...new Set(chatData.messages?.map(msg => msg.from))]
+                    
+                    const currentUser = uniqueSenders.find(sender => sender !== chatData.name) || uniqueSenders[0]
+                    
+                    return chatData.messages?.map((message, index) => {
+                        const isOwnMessage = message.from === currentUser
                         
-                       
-                        <div className="grow">
-                            <div className="bg-gray-600 text-white px-4 py-3 rounded-2xl rounded-tl-none">
-                                <div className="text-sm">
-                                    {formatMessageText(message.text)}
+                        return (
+                            <div key={message.id || index} className={`flex ${isOwnMessage ? 'justify-end' : 'justify-start'} mb-2`}>
+                                <div className={`max-w-xs lg:max-w-md xl:max-w-lg ${isOwnMessage ? 'order-2' : 'order-1'}`}>
+                                    {!isOwnMessage && (
+                                        <div className="text-xs text-gray-400 mb-1 px-2">
+                                            {message.from}
+                                        </div>
+                                    )}
+                                    <div className={`px-4 py-2 rounded-2xl ${
+                                        isOwnMessage 
+                                            ? 'bg-[#2B527E] text-white rounded-br-md' 
+                                            : 'bg-[#2E3C45] text-white rounded-bl-md'
+                                    }`}>
+                                        <div className="text-sm break-words overflow-wrap-anywhere">
+                                            {formatMessageText(message.text)}
+                                        </div>
+                                    </div>
+                                    <div className={`text-xs text-gray-500 mt-1 px-2 ${
+                                        isOwnMessage ? 'text-right' : 'text-left'
+                                    }`}>
+                                        {message.date && formatDate(message.date)}
+                                    </div>
                                 </div>
                             </div>
-                            <div className="text-xs text-gray-500 mt-1 ml-2">
-                                {message.date && formatDate(message.date)}
-                            </div>
-                        </div>
-                    </div>
-                ))}
+                        )
+                    })
+                })()}
             </div>
 
             {(!chatData.messages || chatData.messages.length === 0) && (
