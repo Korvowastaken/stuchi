@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { supabase } from '../lib/supabase'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import Loading from '../components/Loading'
@@ -10,6 +10,19 @@ function Chat({ user }) {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
     const navigate = useNavigate()
+    const messagesEndRef = useRef(null)
+
+    const colorrand = ["#18373D", "#ACAB45", "#893A1A"]
+
+    const getRandomColor = () => {
+        return colorrand[Math.floor(Math.random() * colorrand.length)]
+    }
+
+    const avatarColor = getRandomColor()
+
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    }
 
     useEffect(() => {
         if (chatId) {
@@ -19,6 +32,10 @@ function Chat({ user }) {
             setLoading(false)
         }
     }, [chatId])
+
+    useEffect(() => {
+        scrollToBottom()
+    }, [chatData])
 
     const fetchChatData = async () => {
         try {
@@ -139,7 +156,7 @@ function Chat({ user }) {
 
     return (
         <div className="w-screen relative pt-[6vh]">
-           <div className='fixed top-0 left-0 right-0 z-40 flex justify-center items-center border-b min-h-[4vh] px-1 bg-[#0C263B]'>
+           <div className='fixed top-0 left-0 right-0 z-40 flex justify-between items-center border-b min-h-[4vh] px-1 bg-[#0C263B]'>
                 <button
                     onClick={() => navigate('/')}
                     className="bg-[#18373D] text-white font-extrabold px-3 py-1 rounded-4xl hover:bg-[#5ED0EE] transition-all duration-200"
@@ -147,15 +164,20 @@ function Chat({ user }) {
                     ←
                 </button>
                 
-                <div className='grow flex justify-center'>
+                <div className='flex justify-between'>
                     <h1 className="hover:text-gray-400 px-3 py-2 rounded-md text-2xl font-medium">
                         {chatData.name}
                     </h1>
+
                 </div>
+                <p className='flex justify-center items-center rounded-3xl font font-extrabold mr-2 h-8 w-8' style={{backgroundColor: avatarColor,}}>{chatData.name[0]}</p>
+
+
+
             </div>
             
 
-            <div className="space-y-1 overflow-auto px-2 bg-[#1C2B33] min-h-screen">
+            <div className="space-y-1 overflow-auto px-2 bg-[#1C2B33] min-h-screen pb-4">
                 {(() => {
                     
                     const uniqueSenders = [...new Set(chatData.messages?.map(msg => msg.from))]
@@ -178,7 +200,7 @@ function Chat({ user }) {
                                             ? 'bg-[#2B527E] text-white rounded-br-md' 
                                             : 'bg-[#2E3C45] text-white rounded-bl-md'
                                     }`}>
-                                        <div className="text-sm wrap-break-words overflow-wrap-anywhere">
+                                        <div className="text-sm break-words overflow-wrap-anywhere">
                                             {formatMessageText(message.text)}
                                         </div>
                                     </div>
@@ -192,6 +214,7 @@ function Chat({ user }) {
                         )
                     })
                 })()}
+                <div ref={messagesEndRef} />
             </div>
 
             {(!chatData.messages || chatData.messages.length === 0) && (
