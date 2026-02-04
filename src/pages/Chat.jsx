@@ -178,7 +178,7 @@ function Chat({ user }) {
                                             ? 'bg-[#2B527E] text-white rounded-br-md' 
                                             : 'bg-[#2E3C45] text-white rounded-bl-md'
                                     }`}>
-                                        <div className="text-sm break-words overflow-wrap-anywhere">
+                                        <div className="text-sm wrap-break-words overflow-wrap-anywhere">
                                             {formatMessageText(message.text)}
                                         </div>
                                     </div>

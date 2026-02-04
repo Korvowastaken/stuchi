@@ -3,7 +3,6 @@ import { supabase } from '../lib/supabase'
 import { useNavigate } from 'react-router-dom'
 import ChatBubble from '../components/ChatBubble'
 import Navbar from '../components/Navbar'
-import Loading from '../components/Loading'
 
 function Chats({ user }) {
     const [chats, setChats] = useState([])
@@ -50,7 +49,13 @@ function Chats({ user }) {
     }
     
     if (loading) {
-        return <Loading user={user} message="Loading chats.." />
+        return (
+            <div className="flex justify-between items-center w-screen min-h-screen">     
+                <Navbar user={user} />
+                <div className="flex items-center justify-center text-2xl w-full">Loading chats..</div>
+                <div></div>
+            </div>
+        )
     }
 
     if (error) {
@@ -67,7 +72,7 @@ function Chats({ user }) {
         <div className="w-screen pt-[6vh]">
             <Navbar user={user} />
             {chats.length === 0 ? (
-                <div className="flex flex-col justify-center items-center shadow-sm border-b h-10 min-w-full" >
+                <div className="flex flex-col justify-center items-center py-2 gap-2 min-h-[94vh]" >
                     <p className="text-2xl mb-8 font-bold uppercase">No chats uploaded yet</p>
                     <button
                         onClick={() => navigate('/upload')}
