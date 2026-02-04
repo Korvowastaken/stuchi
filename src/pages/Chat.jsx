@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
 import { useSearchParams, useNavigate } from 'react-router-dom'
+import Loading from '../components/Loading'
 
-function Chat() {
+function Chat({ user }) {
     const [searchParams] = useSearchParams()
     const chatId = searchParams.get('id')
     const [chatData, setChatData] = useState(null)
@@ -76,11 +77,7 @@ function Chat() {
     }
 
     if (loading) {
-        return (
-            <div className="flex justify-center items-center h-screen">
-                <div className="text-lg">Loading chat...</div>
-            </div>
-        )
+        return <Loading user={user} message="Loading chat..." />
     }
 
     if (error) {
@@ -117,22 +114,35 @@ function Chat() {
     }
 
     return (
-        <div className="max-w-4xl mx-auto p-2">
-            <h1 className="text-2xl font-bold mb-8 border-b pb-4">{chatData.name}</h1>
+        <div className="max-w-4xl relative pt-[6vh]">
+           <div className='fixed top-0 left-0 right-0 z-40 flex justify-center items-center border-b min-h-[4vh] px-1 bg-[#0C263B]'>
+                <button
+                    onClick={() => navigate('/')}
+                    className="bg-[#18373D] text-white font-extrabold px-3 py-1 rounded-4xl hover:bg-[#5ED0EE] transition-all duration-200"
+                >
+                    ←
+                </button>
+                
+                <div className='grow flex justify-center'>
+                    <h1 className="hover:text-gray-400 px-3 py-2 rounded-md text-2xl font-medium">
+                        {chatData.name}
+                    </h1>
+                </div>
+            </div>
             
 
-            <div className="space-y-4">
+            <div className="space-y-4 overflow-auto">
                 {chatData.messages?.map((message, index) => (
                     <div key={message.id || index} className="flex items-start gap-4">
                        
-                        <div className="flex-shrink-0">
+                        <div className="shrink-0">
                             <div className="bg-amber-400 text-black px-4 py-2 rounded-lg min-w-24 text-center font-medium">
                                 {message.from}
                             </div>
                         </div>
                         
                        
-                        <div className="flex-grow">
+                        <div className="grow">
                             <div className="bg-gray-600 text-white px-4 py-3 rounded-2xl rounded-tl-none">
                                 <div className="text-sm">
                                     {formatMessageText(message.text)}

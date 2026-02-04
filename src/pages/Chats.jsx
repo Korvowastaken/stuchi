@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
 import { useNavigate } from 'react-router-dom'
+import ChatBubble from '../components/ChatBubble'
+import Navbar from '../components/Navbar'
+import Loading from '../components/Loading'
 
-function Chats() {
+function Chats({ user }) {
     const [chats, setChats] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
@@ -28,7 +31,6 @@ function Chats() {
 
             if (error) throw error
 
-            // Extract chat information from JSON data
             const chatList = data.map(upload => ({
                 id: upload.id,
                 filename: upload.filename,
@@ -46,17 +48,9 @@ function Chats() {
             setLoading(false)
         }
     }
-
-    const handleChatClick = (chatId) => {
-        navigate(`/chat?id=${chatId}`)
-    }
-
+    
     if (loading) {
-        return (
-            <div className="flex justify-center items-center h-screen">
-                <div className="text-lg">Loading chats...</div>
-            </div>
-        )
+        return <Loading user={user} message="Loading chats.." />
     }
 
     if (error) {
@@ -70,9 +64,10 @@ function Chats() {
     }
 
     return (
-        <div className="w-screen">            
+        <div className="w-screen pt-[6vh]">
+            <Navbar user={user} />
             {chats.length === 0 ? (
-                <div className="flex flex-col justify-center items-center min-h-[94vh]" >
+                <div className="flex flex-col justify-center items-center shadow-sm border-b h-10 min-w-full" >
                     <p className="text-2xl mb-8 font-bold uppercase">No chats uploaded yet</p>
                     <button
                         onClick={() => navigate('/upload')}
@@ -82,37 +77,11 @@ function Chats() {
                     </button>
                 </div>
             ) : (
-                <div className="grid gap-4">
+                <div className="flex flex-col items-center py-2 gap-2 min-h-[94vh]">
                     {chats.map((chat) => (
-                        <div
-                            key={chat.id}
-                            onClick={() => handleChatClick(chat.id)}
-                            className="border border-gray-300 rounded-lg p-4 hover:bg-gray-50 cursor-pointer transition-colors"
-                        >
-                            <div className="flex justify-between items-start">
-                                <div>
-                                    <h3 className="text-lg font-semibold">{chat.chatName}</h3>
-                                    <p className="text-sm text-gray-600">
-                                        Type: {chat.chatType} | Messages: {chat.messageCount}
-                                    </p>
-                                    {chat.chatId && (
-                                        <p className="text-sm text-gray-500">Chat ID: {chat.chatId}</p>
-                                    )}
-                                </div>
-                                <div className="text-right">
-                                    <p className="text-xs text-gray-500">
-                                        {new Date(chat.createdAt).toLocaleDateString()}
-                                    </p>
-                                    <p className="text-xs text-gray-400">
-                                        {new Date(chat.createdAt).toLocaleTimeString()}
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="mt-2">
-                                <p className="text-sm text-gray-500">File: {chat.filename}</p>
-                            </div>
-                        </div>
+                        <ChatBubble key={chat.id} chat={chat} />
                     ))}
+                    <button className='bg-gray-500 absolute bottom-12 right-4 py-2 px-4 rounded-3xl font-bold uppercase hover:bg-[#007A97] transition-colors duration-150' onClick={()=>{navigate(`/upload`)}}>Upload</button>
                 </div>
             )}
         </div>

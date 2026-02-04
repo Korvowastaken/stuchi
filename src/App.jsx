@@ -5,6 +5,8 @@ import Upload from './pages/Upload.jsx'
 import Chat from './pages/Chat.jsx'
 import Chats from './pages/Chats.jsx'
 import Login from './pages/Login.jsx'
+import Navbar from './components/Navbar.jsx'
+import Loading from './components/Loading.jsx'
 import './App.css'
 
 function App() {
@@ -28,35 +30,12 @@ function App() {
   }, [])
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-lg">Loading...</div>
-      </div>
-    )
+    return <Loading user={null} message="Loading..." />
   }
 
   return (
     <Router>
-      <div className="flex flex-col min-h-screen">
-        {user && (
-          <nav className="flex shadow-sm border-b min-h-[6vh]">
-            <div className="flex items-center w-full px-1 sm:px-3 lg:px-5">
-              <Link to="/" className=" hover:text-gray-400 px-3 py-2 rounded-md text-sm font-medium">
-                Chats
-              </Link>
-              <Link to="/upload" className=" hover:text-gray-400 px-3 py-2 rounded-md text-sm font-medium">
-                Upload
-              </Link>
-              <button
-                onClick={() => supabase.auth.signOut()}
-                className="ml-auto hover:text-gray-400 px-3 py-2 rounded-md text-sm font-medium"
-              >
-                Sign Out
-              </button>
-            </div>
-          </nav>
-        )}
-        
+      <div className="flex flex-col min-h-screen">        
         <main>
           <Routes>
             <Route 
@@ -65,15 +44,15 @@ function App() {
             />
             <Route 
               path="/" 
-              element={user ? <Chats /> : <Navigate to="/login" />} 
+              element={user ? <Chats user={user} /> : <Navigate to="/login" />} 
             />
             <Route 
               path="/chat" 
-              element={user ? <Chat /> : <Navigate to="/login" />} 
+              element={user ? <Chat user={user} /> : <Navigate to="/login" />} 
             />
             <Route 
               path="/upload" 
-              element={user ? <Upload /> : <Navigate to="/login" />} 
+              element={user ? <Upload user={user} /> : <Navigate to="/login" />} 
             />
           </Routes>
         </main>
