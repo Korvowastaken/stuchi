@@ -156,7 +156,7 @@ function Chat({ user }) {
 
     return (
         <div className="w-screen relative pt-[6vh]">
-           <div className='fixed top-0 left-0 right-0 z-40 flex justify-between items-center border-b min-h-[4vh] px-1 bg-[#0C263B]'>
+           <div className='fixed top-0 left-0 right-0 z-40 flex justify-between items-center border-b min-h-[6vh] px-1 bg-[#0C263B]'>
                 <button
                     onClick={() => navigate('/')}
                     className="bg-[#18373D] text-white font-extrabold px-3 py-1 rounded-4xl hover:bg-[#5ED0EE] transition-all duration-200"
@@ -200,7 +200,7 @@ function Chat({ user }) {
                                             ? 'bg-[#2B527E] text-white rounded-br-md' 
                                             : 'bg-[#2E3C45] text-white rounded-bl-md'
                                     }`}>
-                                        <div className="text-sm break-words overflow-wrap-anywhere">
+                                        <div className="text-sm wrap-break-word overflow-wrap-anywhere">
                                             {formatMessageText(message.text)}
                                         </div>
                                     </div>
