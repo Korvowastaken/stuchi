@@ -69,7 +69,7 @@ function Chats({ user }) {
     }
 
     return (
-        <div className="w-screen pt-[6vh]">
+        <div className="flex flex-col items-center min-w-screen pt-[6vh]">
             <Navbar user={user} />
             {chats.length === 0 ? (
                 <div className="flex flex-col justify-center items-center py-2 gap-2 min-h-[94vh]" >
@@ -82,7 +82,7 @@ function Chats({ user }) {
                     </button>
                 </div>
             ) : (
-                <div className="flex flex-col items-center py-3 min-h-[94vh]">
+                <div className="flex flex-col items-center gap-2 w-screen py-3 min-h-[94vh] lg:mx-[15vw] lg:w-[60vw] lg:p-3 lg:rounded-xl">
                     {chats.map((chat) => (
                         <ChatBubble key={chat.id} chat={chat} />
                     ))}

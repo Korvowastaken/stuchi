@@ -55,12 +55,12 @@ function ChatBubble({ chat }) {
     return (
         <div
             onClick={handleClick}
-            className="relative w-full border-0 border-b px-2 py-2 hover:bg-[#18373D] cursor-pointer transition-colors"
+            className="relative w-full border-0 border-b rounded-t px-2 py-2 hover:bg-[#18373D] cursor-pointer transition-colors"
         >
             <div className="flex items-center">
                 <div className='flex items-center grow'>
 
-                    <p className='flex justify-center items-center rounded-3xl font font-extrabold  mr-2 h-12 w-12' style={{backgroundColor: avatarColor}}>{chat.chatName[0]}</p>
+                    <p className='flex justify-center items-center border rounded-3xl font font-extrabold  mr-2 h-12 w-12' style={{backgroundColor: avatarColor}}>{chat.chatName[0]}</p>
                     <h3 className="text-lg font-semibold">{chat.chatName}</h3>
                     
                 </div>

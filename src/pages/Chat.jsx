@@ -155,29 +155,26 @@ function Chat({ user }) {
     }
 
     return (
-        <div className="w-screen relative pt-[6vh]">
-           <div className='fixed top-0 left-0 right-0 z-40 flex justify-between items-center border-b min-h-[6vh] px-1 bg-[#0C263B]'>
-                <button
-                    onClick={() => navigate('/')}
-                    className="bg-[#18373D] text-white font-extrabold px-3 py-1 rounded-4xl hover:bg-[#5ED0EE] transition-all duration-200"
-                >
-                    ←
-                </button>
-                
-                <div className='flex justify-between'>
+        <div className="flex flex-col w-screen relative pt-[6vh] lg:max-w-[70vw]">
+           <div className='fixed top-0 left-0 right-0 z-40 flex justify-center items-center border-b min-h-[6vh] px-1 bg-[#0C263B]'>
+                <div className="flex justify-between items-center w-full px-1 sm:px-3 lg:px-5 lg:max-w-[70vw] lg:rounded-xl">
+                    <button
+                        onClick={() => navigate('/')}
+                        className="bg-[#18373D] text-white font-extrabold px-3 py-1 rounded-4xl hover:bg-[#5ED0EE] transition-all duration-200"
+                    >
+                        ←
+                    </button>
+                    
                     <h1 className="hover:text-gray-400 px-3 py-2 rounded-md text-2xl font-medium">
                         {chatData.name}
                     </h1>
-
+                    
+                    <p className='flex justify-center items-center rounded-3xl font font-extrabold mr-2 h-8 w-8' style={{backgroundColor: avatarColor, color: 'white'}}>{chatData.name[0]}</p>
                 </div>
-                <p className='flex justify-center items-center rounded-3xl font font-extrabold mr-2 h-8 w-8' style={{backgroundColor: avatarColor,}}>{chatData.name[0]}</p>
-
-
-
             </div>
             
 
-            <div className="space-y-1 overflow-auto px-2 bg-[#1C2B33] min-h-screen pb-4">
+            <div className="flex flex-col space-y-1 overflow-auto px-2 bg-[#1C2B33] min-h-screen pb-4">
                 {(() => {
                     
                     const uniqueSenders = [...new Set(chatData.messages?.map(msg => msg.from))]

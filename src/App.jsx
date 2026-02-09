@@ -5,7 +5,6 @@ import Upload from './pages/Upload.jsx'
 import Chat from './pages/Chat.jsx'
 import Chats from './pages/Chats.jsx'
 import Login from './pages/Login.jsx'
-import Navbar from './components/Navbar.jsx'
 import Loading from './components/Loading.jsx'
 import './App.css'
 
@@ -35,7 +34,7 @@ function App() {
 
   return (
     <Router>
-      <div className="flex flex-col min-h-screen">        
+      <div className="flex flex-col items-center min-h-screen ">        
         <main>
           <Routes>
             <Route 
