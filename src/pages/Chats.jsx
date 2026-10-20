@@ -3,6 +3,7 @@ import { supabase } from '../lib/supabase'
 import { useNavigate } from 'react-router-dom'
 import ChatBubble from '../components/ChatBubble'
 import Navbar from '../components/Navbar'
+import Loading from '../components/Loading'
 
 function Chats({ user }) {
     const [chats, setChats] = useState([])
@@ -16,15 +17,10 @@ function Chats({ user }) {
 
     const fetchChats = async () => {
         try {
-            const { data: { user } } = await supabase.auth.getUser()
-            if (!user) {
-                setError('User not authenticated')
-                return
-            }
-
+            // Only the chat name, not the whole export: json_data can be several MB per chat
             const { data, error } = await supabase
                 .from('user_uploads')
-                .select('id, filename, json_data, created_at')
+                .select('id, filename, created_at, name:json_data->>name')
                 .eq('user_id', user.id)
                 .order('created_at', { ascending: false })
 
@@ -33,10 +29,7 @@ function Chats({ user }) {
             const chatList = data.map(upload => ({
                 id: upload.id,
                 filename: upload.filename,
-                chatName: upload.json_data?.name || 'Unknown Chat',
-                chatType: upload.json_data?.type || 'unknown',
-                chatId: upload.json_data?.id || null,
-                messageCount: upload.json_data?.messages?.length || 0,
+                chatName: upload.name || 'Unknown Chat',
                 createdAt: upload.created_at
             }))
 
@@ -47,15 +40,24 @@ function Chats({ user }) {
             setLoading(false)
         }
     }
-    
+
+    const deleteChat = async (id) => {
+        const { error } = await supabase
+            .from('user_uploads')
+            .delete()
+            .eq('id', id)
+            .eq('user_id', user.id)
+
+        if (error) {
+            console.error('Error deleting chat:', error)
+            return
+        }
+
+        setChats(chats => chats.filter(chat => chat.id !== id))
+    }
+
     if (loading) {
-        return (
-            <div className="flex justify-between items-center w-screen min-h-screen">     
-                <Navbar user={user} />
-                <div className="flex items-center justify-center text-2xl w-full">Loading chats..</div>
-                <div></div>
-            </div>
-        )
+        return <Loading user={user} message="Loading chats..." />
     }
 
     if (error) {
@@ -84,9 +86,9 @@ function Chats({ user }) {
             ) : (
                 <div className="flex flex-col items-center gap-2 w-screen py-3 min-h-[94vh] lg:mx-[15vw] lg:w-[60vw] lg:p-3 lg:rounded-xl">
                     {chats.map((chat) => (
-                        <ChatBubble key={chat.id} chat={chat} />
+                        <ChatBubble key={chat.id} chat={chat} onDelete={deleteChat} />
                     ))}
-                    <button className='bg-gray-500 absolute bottom-12 right-4 py-2 px-4 rounded-3xl font-bold uppercase hover:bg-[#007A97] transition-colors duration-150' onClick={()=>{navigate(`/upload`)}}>Upload</button>
+                    <button className='bg-gray-500 fixed bottom-12 right-4 py-2 px-4 rounded-3xl font-bold uppercase hover:bg-[#007A97] transition-colors duration-150' onClick={()=>{navigate(`/upload`)}}>Upload</button>
                 </div>
             )}
         </div>

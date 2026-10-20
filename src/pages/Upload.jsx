@@ -5,12 +5,13 @@ import Navbar from "../components/Navbar"
 function Upload({ user }) {
 
     const [error, setError] = useState(null)
-    const [chatData, setChatData] = useState(null)
     const [loading, setLoading] = useState(false)
     const [success, setSuccess] = useState(false)
 
     const handleFileUpload = async (event) => {
         const file = event.target.files[0]
+        // Reset so picking the same file again still fires onChange
+        event.target.value = ''
         if (!file) return
 
         setLoading(true)
@@ -25,14 +26,7 @@ function Upload({ user }) {
                 if (!data.name || !data.messages || !Array.isArray(data.messages)) {
                     throw new Error('Invalid JSON structure. Expected name and messages fields.')
                 }
-                
-                setChatData(data)
-                
-                const { data: { user } } = await supabase.auth.getUser()
-                if (!user) {
-                    throw new Error('User not authenticated')
-                }
-                
+
                 const { error: dbError } = await supabase
                     .from('user_uploads')
                     .insert({
@@ -47,7 +41,6 @@ function Upload({ user }) {
                 setError(null)
             } catch (err) {
                 setError(err.message || 'Error processing file')
-                setChatData(null)
                 setSuccess(false)
             } finally {
                 setLoading(false)
@@ -55,7 +48,6 @@ function Upload({ user }) {
         }
         reader.onerror = () => {
             setError('Error reading file')
-            setChatData(null)
             setSuccess(false)
             setLoading(false)
         }
@@ -69,11 +61,11 @@ function Upload({ user }) {
         <div className="flex flex-col items-center h-screen w-screen">
             <Navbar user={user} />
 
-            <div className="flex flex-col h-full w-full justify-center items-center gap-6 bg-[#EFEDEC]">
-                <div className=" border-2 border-dashed border-slate-300 rounded-xl p-8 text-center hover:border-[#007A97] transition-colors duration-200">
+            <div className="flex flex-col h-full w-full justify-center items-center gap-6">
+                <div className=" border-2 border-dashed border-slate-500 rounded-xl p-8 text-center hover:border-[#007A97] transition-colors duration-200">
                     <div className="mb-4">
-                        <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <svg className="w-8 h-8 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div className="w-16 h-16 bg-[#18373D] rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg className="w-8 h-8 text-white"fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                             </svg>
                         </div>
@@ -114,7 +106,7 @@ function Upload({ user }) {
                         )}
                     </label>
                     
-                    <p className="text-sm text-slate-500 mt-3">
+                    <p className="text-sm text-gray-400 mt-3">
                         Supported format: JSON (.json)
                     </p>
                 </div>

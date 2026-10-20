@@ -2,6 +2,19 @@ import { useState, useEffect, useRef } from 'react'
 import { supabase } from '../lib/supabase'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import Loading from '../components/Loading'
+import { avatarColor } from '../lib/avatarColor'
+
+const PAGE_SIZE = 500
+
+// Telegram exports photos, stickers, voice notes and service events with empty text
+const mediaLabel = (message) => {
+    if (message.type === 'service') return message.action?.replaceAll('_', ' ') || 'service message'
+    if (message.photo) return 'photo'
+    if (message.media_type === 'sticker') return `sticker ${message.sticker_emoji || ''}`.trim()
+    if (message.media_type) return message.media_type.replaceAll('_', ' ')
+    if (message.file) return 'file'
+    return null
+}
 
 function Chat({ user }) {
     const [searchParams] = useSearchParams()
@@ -11,14 +24,7 @@ function Chat({ user }) {
     const [error, setError] = useState(null)
     const navigate = useNavigate()
     const messagesEndRef = useRef(null)
-
-    const colorrand = ["#18373D", "#ACAB45", "#893A1A"]
-
-    const getRandomColor = () => {
-        return colorrand[Math.floor(Math.random() * colorrand.length)]
-    }
-
-    const avatarColor = getRandomColor()
+    const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -39,15 +45,9 @@ function Chat({ user }) {
 
     const fetchChatData = async () => {
         try {
-            const { data: { user } } = await supabase.auth.getUser()
-            if (!user) {
-                setError('User not authenticated')
-                return
-            }
-
             const { data, error } = await supabase
                 .from('user_uploads')
-                .select('json_data, filename, created_at')
+                .select('json_data')
                 .eq('id', chatId)
                 .eq('user_id', user.id)
                 .single()
@@ -78,7 +78,7 @@ function Chat({ user }) {
                     return (
                         <a 
                             key={index}
-                            href={item.text} 
+                            href={/^https?:\/\//i.test(item.text) ? item.text : `https://${item.text}`}
                             target="_blank" 
                             rel="noopener noreferrer" 
                             className="text-blue-400 underline hover:text-blue-300 break-all"
@@ -169,21 +169,29 @@ function Chat({ user }) {
                         {chatData.name}
                     </h1>
                     
-                    <p className='flex justify-center items-center rounded-3xl font font-extrabold mr-2 h-8 w-8' style={{backgroundColor: avatarColor, color: 'white'}}>{chatData.name[0]}</p>
+                    <p className='flex justify-center items-center rounded-3xl font font-extrabold mr-2 h-8 w-8' style={{backgroundColor: avatarColor(chatId), color: 'white'}}>{chatData.name[0]}</p>
                 </div>
             </div>
             
 
             <div className="flex flex-col space-y-1 overflow-auto px-2 bg-[#1C2B33] min-h-screen pb-4">
+                {chatData.messages?.length > visibleCount && (
+                    <button
+                        onClick={() => setVisibleCount(count => count + PAGE_SIZE)}
+                        className="self-center my-2 bg-[#18373D] text-white px-4 py-1 rounded-4xl hover:bg-[#5ED0EE] transition-all duration-200"
+                    >
+                        Show earlier messages
+                    </button>
+                )}
                 {(() => {
-                    
-                    const uniqueSenders = [...new Set(chatData.messages?.map(msg => msg.from))]
-                    
-                    const currentUser = uniqueSenders.find(sender => sender !== chatData.name) || uniqueSenders[0]
-                    
-                    return chatData.messages?.map((message, index) => {
-                        const isOwnMessage = message.from === currentUser
-                        
+                    // In a personal chat export, the chat id is the other person's id; everyone else is the uploader.
+                    // Group exports don't say which sender is the uploader, so all messages render as incoming.
+                    const isPersonal = chatData.type === 'personal_chat'
+
+                    return chatData.messages?.slice(-visibleCount).map((message, index) => {
+                        const isOwnMessage = isPersonal && message.from_id !== `user${chatData.id}`
+                        const label = mediaLabel(message)
+
                         return (
                             <div key={message.id || index} className={`flex ${isOwnMessage ? 'justify-end' : 'justify-start'} mb-2`}>
                                 <div className={`max-w-xs lg:max-w-md xl:max-w-lg ${isOwnMessage ? 'order-2' : 'order-1'}`}>
@@ -198,6 +206,7 @@ function Chat({ user }) {
                                             : 'bg-[#2E3C45] text-white rounded-bl-md'
                                     }`}>
                                         <div className="text-sm wrap-break-word overflow-wrap-anywhere">
+                                            {label && <div className="italic text-gray-300">[{label}]</div>}
                                             {formatMessageText(message.text)}
                                         </div>
                                     </div>

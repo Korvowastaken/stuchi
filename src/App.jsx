@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { supabase } from './lib/supabase'
 import Upload from './pages/Upload.jsx'
@@ -6,7 +6,6 @@ import Chat from './pages/Chat.jsx'
 import Chats from './pages/Chats.jsx'
 import Login from './pages/Login.jsx'
 import Loading from './components/Loading.jsx'
-import './App.css'
 
 function App() {
   const [user, setUser] = useState(null)
@@ -39,7 +38,7 @@ function App() {
           <Routes>
             <Route 
               path="/login" 
-              element={!user ? <Login /> : <Navigate to="/upload" />} 
+              element={!user ? <Login /> : <Navigate to="/" />} 
             />
             <Route 
               path="/" 
